@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+
+    <h3 style="padding: 8px 16px;">Albums List</h3>
+    <p style="padding: 8px 16px;">Total albums: <%= albums.length %>
+    </p>
+    <% albums.forEach(album=> { %>
+
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><%= album.titulo %></h5>
+
+                <% let totalTime=0;
+                    album.songs.forEach(song => {
+                        totalTime+=song.milisegundos
+                    })
+                %>
+ 
+                <small class="text-muted"><i class="fa-regular fa-clock"></i> <%= `${Math.floor(totalTime/1000/60)}:${((totalTime/1000)%60).toFixed(0).padStart(2, '0')}`%> </small>
+            </div>
+            <% album.songs.forEach(song => { %>
+                <p class="mb-1"><%= song.nombre %> </p>
+            <% }) %>
+            
+            <small class="text-muted"><%= album.artist.nombre %>  </small>
+        </a>
+    </div>
+
+    <% }) %>
+
+    <%- include('partials/footer') %>

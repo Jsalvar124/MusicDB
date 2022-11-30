@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+
+    <h3 style="padding: 8px 16px;">Artists List</h3>
+    <p style="padding: 8px 16px;">Total artists: <%= artists.length %>
+    </p>
+    <% artists.forEach(artist=> { %>
+
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><%= artist.nombre %></h5>
+                <small class="text-muted"><%=artist.albums.length==1? artist.albums.length+" album": artist.albums.length+" albums"%> </small>
+            </div>
+            
+            <% artist.albums.forEach(album => { %>
+                <small class="text-muted"><%=album.titulo %></small>
+                <br>
+            <% }) %>
+        </a>
+    </div>
+
+    <% }) %>
+
+    <%- include('partials/footer') %>

@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+
+    <h3 style="padding: 8px 16px;">Search Results for "<%=keyWord%>"</h3>
+    <p style="padding: 8px 16px;">Total results: <%=results.length %>
+    </p>
+    <% results.forEach(result=> { %>
+
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><%= result.nombre %></h5>
+                <small class="text-muted"><i class="fa-regular fa-clock"></i> <%= `${Math.floor(result.milisegundos/1000/60)}:${((result.milisegundos/1000)%60).toFixed(0).padStart(2, '0')}`%> </small>
+            </div>
+            <p class="mb-1"><%=result.album.titulo%></p>
+            <small class="text-muted"><%= result.album.artist.nombre%></small>
+        </a>
+    </div>
+
+    <% }) %>
+
+    <%- include('partials/footer') %>
