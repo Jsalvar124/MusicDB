@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session=require('express-session');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -23,6 +25,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({  //la sesion se debe inicializar antes de usar el middleware de userLogged.
+  secret: "clave secreta 78-86-22", 
+  resave: false, 
+  saveUninitialized: false 
+}));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

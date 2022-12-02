@@ -1,3 +1,4 @@
+const { promiseImpl } = require('ejs');
 let db = require('../database/models')
 const sequelize = db.sequelize;
 const Op = db.Sequelize.Op; //sequalize con mayuscula
@@ -18,19 +19,46 @@ let songsController = {
         //const keyWord=req.query
         const keyWord=req.query.keyWord
         try {
-            const results = await db.Song.findAll( 
+            
+            const [songResults, albumResults]= await Promise.all([
+
+                db.Song.findAll(  //find all songs that match the keyword
+                    { 
+                    where:{
+                        [Op.or]:[
+                            {nombre: {[Op.like]:`%${keyWord}%`}},
+                        ]
+                    },
+                    include: { all: true , nested: true }
+                    
+                }),
+
+                db.Album.findAll(  //find all albumns that match the keyword
+                    { 
+                    where:{
+                        [Op.or]:[
+                            {titulo: {[Op.like]:`%${keyWord}%`}},
+                        ]
+                    },
+                    include: { all: true , nested: true }
+                    
+                } )
+    
+            ]);
+
+/*             const songResults = await db.Song.findAll( 
                 { 
                 where:{
                     [Op.or]:[
                         {nombre: {[Op.like]:`%${keyWord}%`}},
-                        {id_album: 2}  // album.titulo: like %keyWord% album.artist.nombre like %keyWord%
                     ]
                 },
                 include: { all: true , nested: true }
                 
-            } )
-            //res.render('searchResult', { results, keyWord });
-            res.send(results)
+            } ); */
+
+            res.render('searchResult', { songResults,albumResults,keyWord });
+            //res.send({songResults: songResults,albumResults: albumResults,keyWord: keyWord})
             
         } catch (error) {
             console.log(error)
