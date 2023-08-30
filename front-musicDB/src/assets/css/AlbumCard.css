@@ -1,0 +1,6 @@
+.album-cover{
+    object-fit: contain;
+    width: 25%;
+    height: auto;
+    min-width: 25%;
+}

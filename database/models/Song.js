@@ -38,6 +38,10 @@ module.exports = function(sequelize, dataTypes){
         Song.belongsTo(models.Album, {
             as: "album",
             foreignKey: "id_album"
+        }),
+		Song.belongsTo(models.Genre, {
+            as: "genero",
+            foreignKey: "id_genero"
         })
     }
 	

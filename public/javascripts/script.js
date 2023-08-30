@@ -9,9 +9,6 @@ window.onload=(req, res)=>{
     let hamburger=document.querySelector('.navbar-toggler')
     let smallText=document.querySelectorAll('.text-muted')
 
-
-    console.log(icon)
-
     let brand=document.querySelector('a.navbar-brand')
     let navLinks=document.querySelectorAll('a.nav-link')
 
@@ -37,6 +34,8 @@ window.onload=(req, res)=>{
             text.style.color='#6C757D'
         }
 
+        localStorage.setItem('mode', 'dark');
+
         //req.session.mode='dark'
      })
 
@@ -58,8 +57,34 @@ window.onload=(req, res)=>{
             text.style.color='#212529'
         }
 
+        localStorage.setItem('mode', 'light');
+
     
     })
+
+
+    if(localStorage.getItem('mode')=="dark"){
+        body.style.backgroundColor='#2d3135'
+        navBar.className="navbar navbar-expand-lg bg-dark";
+        brand.style.color='#FFFFFF';
+        icon.style.color='#FFFFFF8C';
+        hamburger.style.cssText="border: solid #198754 1px; color: #1987548c"
+        for (navLink of navLinks){
+             navLink.style.color='#FFFFFF8C'
+        }
+
+        for (box of boxes){
+            box.style.cssText='color:#FFFFFF8C; background-color:#212529'
+        }
+
+        for (text of summaryText){
+            text.style.color='#FFFFFF8C'
+        }
+
+        for (text of smallText){
+            text.style.color='#6C757D'
+        }
+    }
 
 
 

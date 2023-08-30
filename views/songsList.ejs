@@ -8,7 +8,7 @@
     <div class="list-group">
         <a href="#" class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1"><%= song.titulo %></h5>
+                <h5 class="mb-2"><%= song.titulo %></h5>
                 <small class="text-muted"><i class="fa-regular fa-clock"></i> <%= `${Math.floor(song.milisegundos/1000/60)}:${((song.milisegundos/1000)%60).toFixed(0).padStart(2, '0')}`%> </small>
             </div>
             <p class="mb-1"><%= song.album%></p>
